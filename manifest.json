@@ -1,0 +1,62 @@
+{
+  "manifest_version": "0.2",
+  "name": "live-design-panel",
+  "display_name": "Live Design Panel",
+  "version": "0.1.2",
+  "description": "Style your website from a chat, through Live Design Panel, on your real page in a Chrome window you can watch.",
+  "long_description": "Your site runs Live Design Panel, the design panel on the live page. This extension opens it for the AI: it reads every setting and what it means, changes settings by name as one step you can undo, checks that the page still reads well, and looks at the page. It publishes only when you ask. The first time, a Chrome window opens on your page: log in to your site there, open the page again, and ask again. Needs Google Chrome.",
+  "author": {
+    "name": "Elmastudio",
+    "url": "https://elmastudio.de/en"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/manuelesposito/live-design-panel-connector"
+  },
+  "homepage": "https://livedesignpanel.com",
+  "documentation": "https://github.com/manuelesposito/live-design-panel-connector#readme",
+  "support": "https://github.com/manuelesposito/live-design-panel-connector/issues",
+  "license": "GPL-2.0-or-later",
+  "keywords": ["design", "wordpress", "live-design-panel", "css", "styles"],
+  "server": {
+    "type": "node",
+    "entry_point": "index.mjs",
+    "mcp_config": {
+      "command": "node",
+      "args": ["${__dirname}/index.mjs"],
+      "env": {
+        "LIVE_DESIGN_URL": "${user_config.site_url}"
+      }
+    }
+  },
+  "user_config": {
+    "site_url": {
+      "type": "string",
+      "title": "Your site's address",
+      "description": "A page on your site, for example a blog post. The design is changed there.",
+      "required": true
+    }
+  },
+  "tools": [
+    { "name": "describe", "description": "Every setting with what it means, its values and its current value." },
+    { "name": "set_settings", "description": "Change settings by name, as one step you can undo." },
+    { "name": "preview", "description": "Show a change on the page without keeping it." },
+    { "name": "end_preview", "description": "Leave a preview and show the kept style again." },
+    { "name": "check", "description": "The reading check in numbers: contrast, text size, line length, line spacing." },
+    { "name": "explain", "description": "The current style in one plain paragraph." },
+    { "name": "undo", "description": "Take back the last change." },
+    { "name": "redo", "description": "Put back what undo took." },
+    { "name": "get_style", "description": "The whole style as a record, with a link that carries it." },
+    { "name": "load_style", "description": "Load a whole style as one step you can undo." },
+    { "name": "choose_style", "description": "Switch to another style." },
+    { "name": "open_panel", "description": "Open the design panel on the page." },
+    { "name": "publish", "description": "Only when you ask: the look becomes a style on your site." },
+    { "name": "look", "description": "See the page, or one part of it." }
+  ],
+  "compatibility": {
+    "platforms": ["darwin", "win32", "linux"],
+    "runtimes": {
+      "node": ">=18.0.0"
+    }
+  }
+}

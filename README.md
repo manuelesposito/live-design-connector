@@ -1,4 +1,4 @@
-# Live Design Connector
+# Live Design Panel Connector
 
 Let an AI style your website from a chat.
 
@@ -34,7 +34,7 @@ Pick a post on your site; the reading check measures its article. In the lines b
 **Claude Code**
 
 ```sh
-claude mcp add live-design -e LIVE_DESIGN_URL=https://example.com/hello-world/ -- npx -y github:manuelesposito/live-design-connector
+claude mcp add live-design-panel -e LIVE_DESIGN_URL=https://example.com/hello-world/ -- npx -y github:manuelesposito/live-design-panel-connector
 ```
 
 **Claude Desktop**: open Settings, then Developer, then Edit Config, and add this to `claude_desktop_config.json`:
@@ -42,9 +42,9 @@ claude mcp add live-design -e LIVE_DESIGN_URL=https://example.com/hello-world/ -
 ```json
 {
   "mcpServers": {
-    "live-design": {
+    "live-design-panel": {
       "command": "npx",
-      "args": ["-y", "github:manuelesposito/live-design-connector"],
+      "args": ["-y", "github:manuelesposito/live-design-panel-connector"],
       "env": { "LIVE_DESIGN_URL": "https://example.com/hello-world/" }
     }
   }
@@ -53,13 +53,13 @@ claude mcp add live-design -e LIVE_DESIGN_URL=https://example.com/hello-world/ -
 
 Restart Claude Desktop afterwards.
 
-**Any other app that speaks MCP**: run `npx -y github:manuelesposito/live-design-connector` with `LIVE_DESIGN_URL` set.
+**Any other app that speaks MCP**: run `npx -y github:manuelesposito/live-design-panel-connector` with `LIVE_DESIGN_URL` set.
 
 ## The first time
 
 1. Ask the AI something about your site's design, for example: "Describe my site's design."
 2. A Chrome window opens on your post. Log in to your site there, as you always do, then open the post again.
-3. Ask again. From now on the login stays, in the connector's own Chrome profile (`~/.cache/live-design-connector`). It is separate from your everyday Chrome.
+3. Ask again. From now on the login stays, in the connector's own Chrome profile (`~/.cache/live-design-panel`). It is separate from your everyday Chrome.
 
 ## Try
 
@@ -73,7 +73,7 @@ Restart Claude Desktop afterwards.
 | Variable | What it does |
 | --- | --- |
 | `LIVE_DESIGN_URL` | The post the connector opens. Required. |
-| `LIVE_DESIGN_PROFILE` | Where the connector's Chrome profile lives. Default `~/.cache/live-design-connector`. |
+| `LIVE_DESIGN_PROFILE` | Where the connector's Chrome profile lives. Default `~/.cache/live-design-panel`. |
 | `LIVE_DESIGN_HEADLESS` | `1` runs Chrome without a window (for tests). |
 
 ## Privacy

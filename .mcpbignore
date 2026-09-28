@@ -1,0 +1,8 @@
+# Only the server, its licence and what it needs at run time go into the bundle.
+dist/
+.github/
+*.md
+!README.md
+node_modules/playwright-core/types/
+node_modules/playwright-core/lib/vite/
+node_modules/.package-lock.json

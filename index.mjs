@@ -9,10 +9,11 @@
  * LIVE_DESIGN_URL       the page to style: a post on a site with Live Design Panel, where the OWNER logs in once in
  *                       the window this opens (the door is only on the owner's page). Required.
  * LIVE_DESIGN_HEADLESS  1 = no window (for tests)
- * LIVE_DESIGN_PROFILE   the Chrome profile it keeps (default ~/.cache/live-design-connector); the login stays there.
+ * LIVE_DESIGN_PROFILE   the Chrome profile it keeps (default ~/.cache/live-design-panel); the login stays there.
  *
  * Needs Node 18 or newer and Google Chrome. MCP over stdio is one JSON message per line.
  */
+import fs from 'fs';
 import os from 'os';
 import path from 'path';
 let chromium;
@@ -22,7 +23,9 @@ catch (e) { if (!process.env.PLAYWRIGHT_CORE) { process.stderr.write('live-desig
 const URL_ = process.env.LIVE_DESIGN_URL;
 if (!URL_) { process.stderr.write('live-design: set LIVE_DESIGN_URL to a post on your site, e.g. https://example.com/hello-world/\n'); process.exit(1); }
 const HEADLESS = process.env.LIVE_DESIGN_HEADLESS === '1';
-const PROFILE = process.env.LIVE_DESIGN_PROFILE || path.join(os.homedir(), '.cache', 'live-design-connector'); /* the page keeps its styles between chats */
+const PROFILE = process.env.LIVE_DESIGN_PROFILE || path.join(os.homedir(), '.cache', 'live-design-panel'); /* the page keeps its styles between chats */
+/* the profile's old name (0.1.x): move it once, so the login stays */
+if (!process.env.LIVE_DESIGN_PROFILE) { const OLD = path.join(os.homedir(), '.cache', 'live-design-connector'); try { if (fs.existsSync(OLD) && !fs.existsSync(PROFILE)) fs.renameSync(OLD, PROFILE); } catch (e) { /* keep going with a fresh profile */ } }
 
 let ctx = null, page = null, opening = null;
 /* ONE browser for all calls: an AI sends several at once, and a second launch on the same profile fails */
@@ -71,7 +74,7 @@ const TOOLS = [
 
 function send(msg) { process.stdout.write(JSON.stringify(msg) + '\n'); }
 async function handle(m) {
-  if (m.method === 'initialize') return send({ jsonrpc:'2.0', id:m.id, result:{ protocolVersion:(m.params && m.params.protocolVersion) || '2025-06-18', capabilities:{ tools:{} }, serverInfo:{ name:'live-design', version:'0.1.0' },
+  if (m.method === 'initialize') return send({ jsonrpc:'2.0', id:m.id, result:{ protocolVersion:(m.params && m.params.protocolVersion) || '2025-06-18', capabilities:{ tools:{} }, serverInfo:{ name:'live-design-panel', version:'0.1.2' },
     instructions:'Live Design styles a website. Call describe first; every setting says what it means. Change with set_settings (one undo step, give a why), check the reading check it returns, and use look to see the result.' } });
   if (m.method === 'ping') return send({ jsonrpc:'2.0', id:m.id, result:{} });
   if (m.method === 'tools/list') return send({ jsonrpc:'2.0', id:m.id, result:{ tools:TOOLS.map(({ run, ...t }) => t) } });
