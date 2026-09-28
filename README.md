@@ -13,16 +13,17 @@ Your site runs [Live Design Panel](https://github.com/manuelesposito/live-design
 - **Try a change without keeping it**, then keep it or go back.
 - **Check that the page still reads well**: contrast of text, links and buttons, text size, line length and line spacing, with a suggested fix for each problem.
 - **Look at the page**, to judge a change with its own eyes.
+- **Publish, when you ask it to.** Say "publish my design": the look becomes a style on your site, and what visitors see. On a website without WordPress, Claude gets the new `live-design/site.js`, writes it into your site's folder and puts the site online again.
 
 What it cannot do:
 
-- **Publish.** Changes stay on your page until you press Publish in the panel. Your readers see nothing before that.
+- **Publish on its own.** Until you ask, changes stay on your page. Your readers see nothing before that.
 - **Change the theme's own look.** Its first change makes a copy, as the panel does.
 - **Anything besides design.** It only reaches the panel's settings.
 
 ## What you need
 
-- A site with Live Design Panel 0.12.2 or newer, and an account that may edit the design (an administrator).
+- A site with Live Design Panel (0.12.3 or newer to publish from a chat), and an account that may edit the design (an administrator). Or a website without WordPress that carries the Live Design kit; open it once with `?design` in the address to be its owner.
 - [Node.js](https://nodejs.org) 18 or newer.
 - Google Chrome.
 
