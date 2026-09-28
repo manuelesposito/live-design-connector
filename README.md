@@ -23,7 +23,7 @@ What it cannot do:
 
 ## What you need
 
-- A site with Live Design Panel (0.12.3 or newer to publish from a chat), and an account that may edit the design (an administrator). Or a website without WordPress that carries the Live Design kit; open it once with `?design` in the address to be its owner.
+- A site with Live Design Panel (0.12.5 or newer to publish from a chat), and an account that may edit the design (an administrator). Or a website without WordPress that carries the Live Design kit; open it once with `?design` in the address to be its owner.
 - [Node.js](https://nodejs.org) 18 or newer.
 - Google Chrome.
 
